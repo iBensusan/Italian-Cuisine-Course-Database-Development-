@@ -1,0 +1,55 @@
+Creating Tables:
+
+CREATE TABLE CourseName (
+   Course_name VARCHAR(20) NOT NULL,
+   Academic_year FLOAT(10) NOT NULL,
+   Course_ID VARCHAR(20) NOT NULL,
+   PRIMARY KEY (Course_name)
+);
+
+CREATE TABLE CourseNameProduct (
+   Course_name VARCHAR(20) NOT NULL,
+   Product VARCHAR(50) NOT NULL,
+   Cost DECIMAL(10, 2),
+   PRIMARY KEY (Course_name, Product)
+);
+
+CREATE TABLE Product (
+   Product VARCHAR(50) NOT NULL,
+   Recipe_type VARCHAR(30) NOT NULL,
+   Ingredients_ID INT NOT NULL,
+   PRIMARY KEY (Product)
+);
+
+CREATE TABLE Ingredients (
+   Ingredients_ID INT NOT NULL,
+   Ingredient1 VARCHAR(50),
+   Ingredient2 VARCHAR(50),
+   -- up to Ingredient12
+   PRIMARY KEY (Ingredients_ID)
+);
+
+Inserting Data:
+
+INSERT INTO CourseName (Course_name, Course_ID, Academic_year) VALUES 
+('Italian Cuisine', '12345', '2022');
+
+INSERT ALL
+INTO CourseNameProduct (Course_name, Product, Cost) VALUES ('Italian Cuisine', 'Aubergine Rolls', 4.50)
+INTO CourseNameProduct (Course_name, Product, Cost) VALUES ('Italian Cuisine', 'Oregano focaccia', 3.50)
+SELECT * FROM dual;
+
+Total cost of products:
+
+SELECT SUM(Cost) FROM CourseNameProduct WHERE Product IN ('Aubergine Rolls', 'Oregano focaccia');
+
+Maximum and Minimum prices:
+
+SELECT MAX(Cost) FROM CourseNameProduct WHERE Cost < 10;
+SELECT MIN(Cost) FROM CourseNameProduct WHERE Cost > 10;
+
+Inner join between Product and Ingredients:
+
+SELECT Product, Ingredient1 FROM Product 
+INNER JOIN Ingredients ON Product.Ingredients_ID = Ingredients.Ingredients_ID
+ORDER BY Product ASC;
